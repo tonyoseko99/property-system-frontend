@@ -7,3 +7,36 @@ export const getProperties = async () => {
   const data = await res.json();
   return data;
 };
+
+// get a property by id
+export const getProperty = async (id) => {
+  const res = await fetch(`${BASE_URL}/${id}`);
+  const data = await res.json();
+  return data;
+};
+
+// create a property
+export const createProperty = async (property) => {
+  const res = await fetch(BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(property),
+  });
+  const data = await res.json();
+  return data;
+};
+
+// update a property
+export const updateProperty = async (id, property) => {
+  const res = await fetch(`${BASE_URL}?id=${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(property),
+  });
+  const data = await res.json();
+  return data;
+};
