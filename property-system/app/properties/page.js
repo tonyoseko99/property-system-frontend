@@ -43,7 +43,7 @@ function Properties() {
           Add Property
         </button>
       </div>
-      <div>
+      <div className="mt-6">
         <PropertyList properties={properties} />
 
         {showModal && (

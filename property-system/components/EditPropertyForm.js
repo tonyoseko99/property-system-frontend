@@ -17,7 +17,7 @@ function EditPropertyForm({ onClose, property }) {
       const data = await updateProperty(property.id, updatedProperty);
       console.log(data);
       onClose();
-      router.push("/properties");
+      window.location.reload();
     } catch (error) {
       setError(error);
     } finally {

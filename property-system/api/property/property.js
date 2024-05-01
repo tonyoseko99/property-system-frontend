@@ -30,12 +30,21 @@ export const createProperty = async (property) => {
 
 // update a property
 export const updateProperty = async (id, property) => {
-  const res = await fetch(`${BASE_URL}?id=${id}`, {
+  const res = await fetch(`${BASE_URL}/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(property),
+  });
+  const data = await res.json();
+  return data;
+};
+
+// delete a property
+export const deleteProperty = async (id) => {
+  const res = await fetch(`${BASE_URL}?id=${id}`, {
+    method: "DELETE",
   });
   const data = await res.json();
   return data;
