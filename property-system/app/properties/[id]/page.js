@@ -109,13 +109,14 @@ function PropertyDetails({ params }) {
           </tbody>
         </table>
         {/* pass the floorId to the form */}
-        {/* {showModal && (
+        {showModal && (
           <AddUnitForm
             onClose={() => setShowModal(false)}
-            floorId={params.id}
+            // pass a floor id, map through the floors and get the id similar to the floor component
+            floorId={floors.map((floor) => floor.id)}
             onAddUnit={() => window.location.reload()}
           />
-        )} */}
+        )}
       </div>
     </div>
   );

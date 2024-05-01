@@ -5,8 +5,10 @@ import UnitList from "@/components/UnitList";
 import { getUnitsByFloorId } from "@/api/property/floor";
 import AddUnitForm from "@/components/AddUnitForm";
 
-function Floor({ params }) {
-  console.log(`params.id: ${params.id}`);
+function Floor({params}) {
+  const pathParams = params.id.split("/");
+  const floorId = pathParams.slice(-1)[0];
+  console.log(`last param id ${floorId}`);
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +16,7 @@ function Floor({ params }) {
 
   const fetchUnits = async () => {
     try {
-      const units = await getUnitsByFloorId(params.id);
+      const units = await getUnitsByFloorId(floorId);
       setUnits(units.data);
       console.log(units);
       setLoading(false);
@@ -23,10 +25,10 @@ function Floor({ params }) {
     }
   };
   useEffect(() => {
-    if (params.id !== undefined) {
+    if (floorId !== undefined) {
       fetchUnits();
     }
-  }, [params.id]);
+  }, [floorId]);
 
   const handleAddUnit = () => {
     fetchUnits();
@@ -45,28 +47,21 @@ function Floor({ params }) {
     <div className="container mx-auto mt-12 h-screen">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Floor Details</h1>
-        <Link href="/properties">
+        {/* <Link href="/properties">
           <button className="mt-16 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors">
             Back
           </button>
-        </Link>
+        </Link> */}
         {/* button to add a unit */}
 
-        <button
+        {/* <button
           className="mt-16 px-6 py-3 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors"
           onClick={() => setShowModal(true)}
         >
           Add Unit
-        </button>
+        </button> */}
         <UnitList units={units} />
       </div>
-      {showModal && (
-        <AddUnitForm
-          floorId={params.id}
-          onClose={() => setShowModal(false)}
-          onAddUnit={handleAddUnit}
-        />
-      )}
     </div>
   );
 }
