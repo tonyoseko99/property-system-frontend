@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { createUnit } from "@/api/property/unit";
 
-function AddUnitForm({floorId, onClose, onAddUnit}) {
+function AddUnitForm({ floorId, onClose, onAddUnit }) {
   const [unit, setUnit] = useState({
     unitNumber: "",
     squareFt: "",
@@ -67,14 +67,16 @@ function AddUnitForm({floorId, onClose, onAddUnit}) {
             >
               Unit Status
             </label>
-            <input
-              type="text"
+            <select
               id="unitStatus"
               name="unitStatus"
               value={unit.unitStatus}
               onChange={handleChange}
               className="text-black mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
+            >
+              <option value="VACANT">VACANT</option>
+              <option value="OCCUPIED">OCCUPIED</option>
+            </select>
           </div>
           <div className="mb-4">
             <label
