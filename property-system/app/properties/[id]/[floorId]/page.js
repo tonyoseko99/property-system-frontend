@@ -6,6 +6,7 @@ import { getUnitsByFloorId } from "@/api/property/floor";
 import AddUnitForm from "@/components/AddUnitForm";
 
 function Floor({ params }) {
+  console.log(`params.id: ${params.id}`);
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
