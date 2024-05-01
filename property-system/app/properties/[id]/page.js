@@ -5,6 +5,7 @@ import { getProperty } from "@/api/property/property";
 import { getFloorByPropertyId } from "@/api/property/floor";
 import Loader from "@/components/Loader";
 import AddFloorForm from "@/components/AddFloorForm";
+import AddUnitForm from "@/components/AddUnitForm";
 
 function PropertyDetails({ params }) {
   const [property, setProperty] = useState({});
@@ -35,9 +36,11 @@ function PropertyDetails({ params }) {
   };
 
   useEffect(() => {
-    fetchProperty();
-    fetchFloors();
-  }, []);
+    if (params.id !== undefined) {
+      fetchProperty();
+      fetchFloors();
+    }
+  }, [params.id]);
 
   if (loading || !property) {
     return <Loader />;
@@ -92,9 +95,11 @@ function PropertyDetails({ params }) {
                   {floor.totalArea}
                 </td>
                 <td className="p-2 border border-gray-300 flex gap-4 justify-center">
-                  <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
-                    View Units
-                  </button>
+                  <Link href={`/properties/${params.id}/${floor.id}`}>
+                    <button className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors">
+                      View Units
+                    </button>
+                  </Link>
                   <button className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors">
                     Delete
                   </button>
@@ -103,6 +108,14 @@ function PropertyDetails({ params }) {
             ))}
           </tbody>
         </table>
+        {/* pass the floorId to the form */}
+        {/* {showModal && (
+          <AddUnitForm
+            onClose={() => setShowModal(false)}
+            floorId={params.id}
+            onAddUnit={() => window.location.reload()}
+          />
+        )} */}
       </div>
     </div>
   );

@@ -31,3 +31,10 @@ export const createFloor = async (propertyId, floor) => {
   const data = await res.json();
   return data;
 };
+
+// get all units by floorId
+export const getUnitsByFloorId = async (id) => {
+  const res = await fetch(`${BASE_URL}/${id}`);
+  const data = await res.json();
+  return data;
+}
