@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import Loader from "@/components/Loader";
 import { getTenants } from "@/api/tenant/tenant";
 import AddTenant from "@/components/AddTenant";
+import AddAgreementForm from "@/components/AddAgreementForm";
+import Link from "next/link";
 
 function Tenants() {
   const [tenants, setTenants] = useState([]);
+  const [selectedTenant, setSelectedTenant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -61,6 +64,12 @@ function Tenants() {
               <td>{tenant.dateOfBirth}</td>
               <td>{tenant.status}</td>
               <td className="flex justify-center">
+                {/* create agreement button */}
+                <Link href={`/tenants/${tenant.id}`}>
+                  <button className="mr-6 px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors">
+                    View
+                  </button>
+                </Link>
                 <button className="mr-6 px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 transition-colors">
                   Edit
                 </button>

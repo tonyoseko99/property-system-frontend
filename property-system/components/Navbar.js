@@ -23,7 +23,7 @@ function Navbar() {
             <Link className={`link ${pathname === "/tenants" ? "active" : ""}`} href="/tenants">Tenants</Link>
           </li>
           <li className="mr-6">
-            <Link className={`link ${pathname === "/about" ? "active" : ""}`} href="/about">About</Link>
+            <Link className={`link ${pathname === "/agreements" ? "active" : ""}`} href="/agreements">Agreements</Link>
           </li>
           {/* Add more links for other pages */}
         </ul>

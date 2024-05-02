@@ -1,8 +1,12 @@
 "use client";
 import { useState } from "react";
 import { createUnit } from "@/api/property/unit";
+import { useParams } from "next/navigation";
 
-function AddUnitForm({ floorId, onClose, onAddUnit }) {
+function AddUnitForm({ onClose, onAddUnit }) {
+  const params = useParams();
+  const floorId = params.floorId;
+  console.log(`new id param${params.floorId}`); 
   const [unit, setUnit] = useState({
     unitNumber: "",
     squareFt: "",

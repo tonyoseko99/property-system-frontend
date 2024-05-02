@@ -4,11 +4,15 @@ import Link from "next/link";
 import UnitList from "@/components/UnitList";
 import { getUnitsByFloorId } from "@/api/property/floor";
 import AddUnitForm from "@/components/AddUnitForm";
+import { useParams } from "next/navigation";
 
 function Floor({params}) {
+  const par = useParams();
+  console.log(par.floorId); 
   const pathParams = params.id.split("/");
-  const floorId = pathParams.slice(-1)[0];
-  console.log(`last param id ${floorId}`);
+  console.log(pathParams); // logs the property id and floor id from the URL
+  const floorId = pathParams[0];
+  console.log(`last param id ${floorId}`); // logs the property id from the URL
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,7 +20,7 @@ function Floor({params}) {
 
   const fetchUnits = async () => {
     try {
-      const units = await getUnitsByFloorId(floorId);
+      const units = await getUnitsByFloorId(par.floorId);
       setUnits(units.data);
       console.log(units);
       setLoading(false);
@@ -25,10 +29,10 @@ function Floor({params}) {
     }
   };
   useEffect(() => {
-    if (floorId !== undefined) {
+    if (par.floorId !== undefined) {
       fetchUnits();
     }
-  }, [floorId]);
+  }, [par.floorId]);
 
   const handleAddUnit = () => {
     fetchUnits();
